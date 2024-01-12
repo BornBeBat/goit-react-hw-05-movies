@@ -1,14 +1,26 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import API from 'filmAPI/API';
 
 export const Home = () => {
-  const list = ['movie1', 'movie2', 'movie3', 'movie4', 'movie5'];
+  const [filmList, setFilmList] = useState([]);
+
+  useEffect(() => {
+    API.fetchHomePage()
+      .then(response => {
+        console.log(response.results);
+        setFilmList(response.results);
+      })
+      .catch(error => console.log(error));
+  }, []);
+
   return (
     <>
-      <h2>Home</h2>
+      <h2>Trending today</h2>
       <ul>
-        {list.map(e => (
-          <li key={e}>
-            <Link to={`/movies/${e}`}>{e}</Link>
+        {filmList.map(e => (
+          <li key={e.id}>
+            <Link to={`/movies/${e.id}`}>{e.name || e.title}</Link>
           </li>
         ))}
       </ul>
