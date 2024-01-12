@@ -31,6 +31,13 @@ class API {
     const response = await axios(options);
     return response.data;
   }
+  async fetchById(id) {
+    const options = {
+      ...this.options,
+      url: `3/movie/${id}`,
+    };
+    const response = await axios(options);
+    return response.data;
+  }
 }
-
 export default new API();
