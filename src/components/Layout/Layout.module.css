@@ -1,0 +1,25 @@
+.list {
+  list-style: none;
+  display: flex;
+  gap: 26px;
+  color: black;
+}
+
+.item {
+  display: block;
+}
+
+.link {
+  padding: 6px 36px;
+  border: 1px solid black;
+  border-radius: 16px;
+  box-shadow: 1px 1px 1px black;
+  transition: box-shadow 350ms ease-in, border 350ms ease-in,
+    color 350ms ease-in;
+  &:hover,
+  &:active {
+    box-shadow: 2px 2px 2px aquamarine;
+    border-color: aquamarine;
+    color: aquamarine;
+  }
+}
