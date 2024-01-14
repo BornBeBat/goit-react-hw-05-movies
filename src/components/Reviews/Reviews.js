@@ -16,7 +16,7 @@ export const Reviews = () => {
 
   return (
     <>
-      {data.length === 0 && (
+      {data !== null && data.length === 0 && (
         <p>sorry, we don't have any reviews for this movie.</p>
       )}
       {data !== null && (

@@ -1,14 +1,13 @@
-import { SearchForm } from 'components';
 import API from 'filmAPI/API';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 export const Movies = () => {
-  const [filmList, setFilmList] = useState(null);
-  const [query, setQuery] = useState('');
+  const [filmList, setFilmList] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('q');
 
   useEffect(() => {
-    if (!query) return;
     API.fetchByQuery(query)
       .then(response => {
         setFilmList(response.results);
@@ -16,17 +15,20 @@ export const Movies = () => {
       .catch(error => console.log(error));
   }, [query]);
 
-  const getSearchQuery = query => {
-    setQuery(query);
+  const getSearchQuery = e => {
+    e.preventDefault();
+    const { value } = e.target.children.query;
+    setSearchParams({ q: value });
+    e.target.reset();
   };
 
   return (
     <>
-      <SearchForm onSubmit={getSearchQuery} />
-      {filmList.length === 0 && (
-        <p>We cant find anythin by your request: {query}</p>
-      )}
-      {filmList !== null && (
+      <form onSubmit={getSearchQuery}>
+        <input type="text" name="query" />
+        <button type="submit">Search</button>
+      </form>
+      {filmList.length !== 0 && (
         <ul>
           {filmList.map(e => (
             <li key={e.id}>

@@ -8,7 +8,6 @@ export const Home = () => {
   useEffect(() => {
     API.fetchHomePage()
       .then(response => {
-        console.log(response.results);
         setFilmList(response.results);
       })
       .catch(error => console.log(error));

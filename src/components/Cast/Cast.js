@@ -15,20 +15,25 @@ export const Cast = () => {
   }, [movieId]);
 
   return (
-    data && (
-      <ul>
-        {data.map(el => (
-          <li key={el.id}>
-            <img
-              width={150}
-              src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${el.profile_path}`}
-              alt={el.original_name}
-            />
-            <p>{el.original_name}</p>
-            <p>Character: {el.character}</p>
-          </li>
-        ))}
-      </ul>
-    )
+    <>
+      {data !== null && data.length === 0 && (
+        <p>sorry, we don't have any casts for this movie.</p>
+      )}
+      {data !== null && (
+        <ul>
+          {data.map(el => (
+            <li key={el.id}>
+              <img
+                width={150}
+                src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${el.profile_path}`}
+                alt={el.original_name}
+              />
+              <p>{el.original_name}</p>
+              <p>Character: {el.character}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
