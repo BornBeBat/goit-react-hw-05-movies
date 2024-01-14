@@ -3,7 +3,7 @@ import s from './Layout.module.css';
 export const Layout = () => {
   return (
     <>
-      <header>
+      <header className={s.header}>
         <nav>
           <ul className={s.list}>
             <li className={s.item}>

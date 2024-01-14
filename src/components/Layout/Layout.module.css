@@ -23,3 +23,8 @@
     color: aquamarine;
   }
 }
+
+.header {
+  display: block;
+  padding: 15px;
+}

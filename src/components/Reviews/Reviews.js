@@ -16,19 +16,17 @@ export const Reviews = () => {
 
   return (
     <>
-      {data !== null && data.length === 0 && (
+      {data?.length === 0 && (
         <p>sorry, we don't have any reviews for this movie.</p>
       )}
-      {data !== null && (
-        <ul>
-          {data.map(el => (
-            <li key={el.id}>
-              <h3>Author: {el.author}</h3>
-              <p>{el.content}</p>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {data?.map(element => (
+          <li key={element?.id}>
+            <h3>Author: {element?.author}</h3>
+            <p>{element?.content}</p>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
