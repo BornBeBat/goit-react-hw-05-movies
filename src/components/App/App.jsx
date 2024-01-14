@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home, MovieDetails, Movies } from 'pages';
-import { Cast, Layout } from 'components';
+import { Cast, Layout, Reviews } from 'components';
 export const App = () => {
   return (
     <Routes>
@@ -9,7 +9,7 @@ export const App = () => {
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
           <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<div>reviews</div>} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
       </Route>
     </Routes>
