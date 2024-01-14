@@ -8,19 +8,18 @@ export const MovieDetails = () => {
     genres: [],
     release_date: '',
   });
-  const [filmId] = useState(useParams().movieId);
   const [status, setStatus] = useState('init');
+  const { movieId } = useParams();
 
   useEffect(() => {
     setStatus('init');
-    API.fetchById(filmId)
+    API.fetchById(movieId)
       .then(response => {
-        console.log(response);
         setFilm(response);
         setStatus('ok');
       })
       .catch(error => console.log(error));
-  }, [filmId]);
+  }, [movieId]);
 
   return (
     status === 'ok' && (
@@ -35,7 +34,7 @@ export const MovieDetails = () => {
               {(film.original_title || film.original_name) +
                 ` (${film.release_date.slice(0, 4)})`}
             </h2>
-            <p>User Score: {film.vote_average * 10}%</p>
+            <p>User Score: {(film.vote_average * 10).toFixed(2)}%</p>
             <h3>overview</h3>
             <p>{film.overview}</p>
             <h3>genres</h3>

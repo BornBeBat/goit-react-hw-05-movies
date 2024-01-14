@@ -2,5 +2,5 @@
   display: flex;
   gap: 26px;
   padding: 24px 36px;
-  justify-content: end;
+  justify-content: flex-start;
 }

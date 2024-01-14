@@ -4,7 +4,7 @@ class API {
   constructor() {
     this.options = {
       method: 'GET',
-      baseURL: 'https://api.themoviedb.org/',
+      baseURL: 'https://api.themoviedb.org/3/',
       headers: {
         accept: 'application/json',
         Authorization:
@@ -16,7 +16,7 @@ class API {
   async fetchHomePage() {
     const options = {
       ...this.options,
-      url: '3/trending/all/day',
+      url: 'trending/all/day',
     };
     const response = await axios(options);
     return response.data;
@@ -25,7 +25,7 @@ class API {
   async fetchByQuery(query) {
     const options = {
       ...this.options,
-      url: '3/search/movie',
+      url: 'search/movie',
       params: { query },
     };
     const response = await axios(options);
@@ -34,10 +34,28 @@ class API {
   async fetchById(id) {
     const options = {
       ...this.options,
-      url: `3/movie/${id}`,
+      url: `movie/${id}`,
+    };
+    const response = await axios(options);
+    return response.data;
+  }
+  async fetchCasts(id) {
+    const options = {
+      ...this.options,
+      url: `movie/${id}/credits`,
+    };
+    const response = await axios(options);
+    return response.data;
+  }
+  async fetchReviews(id) {
+    const options = {
+      ...this.options,
+      url: `movie/${id}/reviews`,
     };
     const response = await axios(options);
     return response.data;
   }
 }
 export default new API();
+// https://api.themoviedb.org/3/movie/movie_id/credits
+// 'https://api.themoviedb.org/3/movie/872585/reviews';
