@@ -1,5 +1,5 @@
 import API from 'filmAPI/API';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Link,
   NavLink,
@@ -12,7 +12,8 @@ import s from './MovieDetails.module.css';
 export const MovieDetails = () => {
   const [film, setFilm] = useState(null);
   const { movieId } = useParams();
-  const location = useLocation();
+  const variable = useLocation();
+  const location = useRef(variable);
 
   useEffect(() => {
     API.fetchById(movieId)
@@ -24,7 +25,7 @@ export const MovieDetails = () => {
 
   return (
     <section className={s.section}>
-      <Link className={s.backBtn} to={location.state?.from ?? '/movies'}>
+      <Link className={s.backBtn} to={location.current.state?.from ?? '/'}>
         back
       </Link>
       <div className={s.wrapper}>
