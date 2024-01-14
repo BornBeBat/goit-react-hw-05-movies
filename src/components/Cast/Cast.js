@@ -22,7 +22,7 @@ export const Cast = () => {
             <img
               width={150}
               src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${el.profile_path}`}
-              alt="sss"
+              alt={el.original_name}
             />
             <p>{el.original_name}</p>
             <p>Character: {el.character}</p>

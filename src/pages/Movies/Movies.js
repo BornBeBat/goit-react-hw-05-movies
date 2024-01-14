@@ -4,14 +4,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const Movies = () => {
-  const [filmList, setFilmList] = useState([]);
+  const [filmList, setFilmList] = useState(null);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
     if (!query) return;
     API.fetchByQuery(query)
       .then(response => {
-        console.log(response);
         setFilmList(response.results);
       })
       .catch(error => console.log(error));
@@ -24,13 +23,18 @@ export const Movies = () => {
   return (
     <>
       <SearchForm onSubmit={getSearchQuery} />
-      <ul>
-        {filmList.map(e => (
-          <li key={e.id}>
-            <Link to={`/movies/${e.id}`}>{e.name || e.title}</Link>
-          </li>
-        ))}
-      </ul>
+      {filmList.length === 0 && (
+        <p>We cant find anythin by your request: {query}</p>
+      )}
+      {filmList !== null && (
+        <ul>
+          {filmList.map(e => (
+            <li key={e.id}>
+              <Link to={`/movies/${e.id}`}>{e.name || e.title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 export const Reviews = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const { movieId } = useParams();
   useEffect(() => {
     API.fetchReviews(movieId)
@@ -15,15 +15,20 @@ export const Reviews = () => {
   }, [movieId]);
 
   return (
-    data.length !== 0 && (
-      <ul>
-        {data.map(el => (
-          <li key={el.id}>
-            <h3>Author: {el.author}</h3>
-            <p>{el.content}</p>
-          </li>
-        ))}
-      </ul>
-    )
+    <>
+      {data.length === 0 && (
+        <p>sorry, we don't have any reviews for this movie.</p>
+      )}
+      {data !== null && (
+        <ul>
+          {data.map(el => (
+            <li key={el.id}>
+              <h3>Author: {el.author}</h3>
+              <p>{el.content}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
