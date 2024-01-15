@@ -23,8 +23,6 @@ export const MovieDetails = () => {
       })
       .catch(error => console.log(error));
   }, [movieId]);
-  console.log(film?.poster_path);
-
   return (
     <section className={s.section}>
       <Link className={s.backBtn} to={location.current.state?.from ?? '/'}>
@@ -34,10 +32,11 @@ export const MovieDetails = () => {
         <div className={s.wrapper}>
           <img
             src={
-              film?.poster_path !== undefined
+              film?.poster_path
                 ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${film?.poster_path}`
                 : plaseholder
             }
+            width={250}
             alt="poster "
           />
           <div>

@@ -1,8 +1,8 @@
-import API from 'filmAPI/API';
 import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import API from 'filmAPI/API';
 import s from './Movies.module.css';
-import { ListItem } from 'components/ListItem/ListItem';
+import { SearchForm, ListItem } from 'components';
 
 export const Movies = () => {
   const [filmList, setFilmList] = useState();
@@ -18,22 +18,12 @@ export const Movies = () => {
       .catch(error => console.log(error));
   }, [query]);
 
-  const getSearchQuery = e => {
-    e.preventDefault();
-    const searchKey = e.target.children.query.value;
-    if (searchKey === '') {
-      alert('inter your film');
-      return;
-    }
-    setSearchParams({ q: searchKey });
-    e.target.reset();
+  const getSearchQuery = searchQuery => {
+    setSearchParams({ q: searchQuery });
   };
   return (
     <section className={s.section}>
-      <form onSubmit={getSearchQuery}>
-        <input type="text" name="query" />
-        <button type="submit">Search</button>
-      </form>
+      <SearchForm getSearchQuery={getSearchQuery} />
 
       <ul>
         {filmList?.map(element => (
