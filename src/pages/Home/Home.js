@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import API from 'filmAPI/API';
 import s from './Home.module.css';
+import { ListItem } from 'components/ListItem/ListItem';
 
 export const Home = () => {
   const [filmList, setFilmList] = useState();
@@ -20,11 +21,7 @@ export const Home = () => {
       <h2>Trending today</h2>
       <ul>
         {filmList?.map(element => (
-          <li key={element?.id}>
-            <Link to={`/movies/${element?.id}`} state={{ from: location }}>
-              {element?.original_name || element?.original_title}
-            </Link>
-          </li>
+          <ListItem key={element?.id} location={location} element={element} />
         ))}
       </ul>
     </section>

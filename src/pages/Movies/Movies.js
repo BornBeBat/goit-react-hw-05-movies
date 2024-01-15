@@ -1,7 +1,8 @@
 import API from 'filmAPI/API';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import s from './Movies.module.css';
+import { ListItem } from 'components/ListItem/ListItem';
 
 export const Movies = () => {
   const [filmList, setFilmList] = useState();
@@ -36,11 +37,7 @@ export const Movies = () => {
 
       <ul>
         {filmList?.map(element => (
-          <li key={element?.id}>
-            <Link to={`/movies/${element?.id}`} state={{ from: location }}>
-              {element?.name || element?.title}
-            </Link>
-          </li>
+          <ListItem key={element?.id} location={location} element={element} />
         ))}
       </ul>
     </section>
