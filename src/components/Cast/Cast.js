@@ -1,6 +1,7 @@
 import API from 'filmAPI/API';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import placeholder from 'image/Placeholder.png';
 
 export const Cast = () => {
   const [data, setData] = useState(null);
@@ -24,7 +25,11 @@ export const Cast = () => {
           <li key={element?.id}>
             <img
               width={150}
-              src={`https://www.themoviedb.org/t/p/w300_and_h450_bestv2${element?.profile_path}`}
+              src={
+                element?.profile_path
+                  ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${element?.profile_path}`
+                  : placeholder
+              }
               alt={element?.original_name}
             />
             <p>{element?.original_name}</p>
