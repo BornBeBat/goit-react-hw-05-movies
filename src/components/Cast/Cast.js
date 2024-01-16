@@ -20,23 +20,25 @@ export const Cast = () => {
       {data?.length === 0 && (
         <p>sorry, we don't have any casts for this movie.</p>
       )}
-      <ul>
-        {data?.map(element => (
-          <li key={element?.id}>
-            <img
-              width={150}
-              src={
-                element?.profile_path
-                  ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${element?.profile_path}`
-                  : placeholder
-              }
-              alt={element?.original_name}
-            />
-            <p>{element?.original_name}</p>
-            <p>Character: {element?.character}</p>
-          </li>
-        ))}
-      </ul>
+      {data?.length !== 0 && (
+        <ul>
+          {data?.map(element => (
+            <li key={element?.id}>
+              <img
+                width={150}
+                src={
+                  element?.profile_path
+                    ? `https://www.themoviedb.org/t/p/w300_and_h450_bestv2${element?.profile_path}`
+                    : placeholder
+                }
+                alt={element?.original_name}
+              />
+              <p>{element?.original_name}</p>
+              <p>Character: {element?.character}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import API from 'filmAPI/API';
 import s from './Movies.module.css';
-import { SearchForm, ListItem } from 'components';
+import { SearchForm, FilmList } from 'components';
 
 export const Movies = () => {
-  const [filmList, setFilmList] = useState();
+  const [filmList, setFilmList] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q');
-  const location = useLocation();
 
   useEffect(() => {
     API.fetchByQuery(query)
@@ -21,15 +20,12 @@ export const Movies = () => {
   const getSearchQuery = searchQuery => {
     setSearchParams({ q: searchQuery });
   };
+
   return (
     <section className={s.section}>
       <SearchForm getSearchQuery={getSearchQuery} />
 
-      <ul>
-        {filmList?.map(element => (
-          <ListItem key={element?.id} location={location} element={element} />
-        ))}
-      </ul>
+      {filmList && <FilmList filmList={filmList} />}
     </section>
   );
 };

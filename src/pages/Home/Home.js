@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import API from 'filmAPI/API';
 import s from './Home.module.css';
-import { ListItem } from 'components/ListItem/ListItem';
+import { FilmList } from 'components';
 
 export const Home = () => {
-  const [filmList, setFilmList] = useState();
-  const location = useLocation();
+  const [filmList, setFilmList] = useState(null);
 
   useEffect(() => {
     API.fetchHomePage()
@@ -19,11 +17,7 @@ export const Home = () => {
   return (
     <section className={s.section}>
       <h2>Trending today</h2>
-      <ul>
-        {filmList?.map(element => (
-          <ListItem key={element?.id} location={location} element={element} />
-        ))}
-      </ul>
+      {filmList && <FilmList filmList={filmList} />}
     </section>
   );
 };
