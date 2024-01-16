@@ -24,7 +24,6 @@ export const Movies = () => {
   return (
     <section className={s.section}>
       <SearchForm getSearchQuery={getSearchQuery} />
-
       {filmList && <FilmList filmList={filmList} />}
     </section>
   );
